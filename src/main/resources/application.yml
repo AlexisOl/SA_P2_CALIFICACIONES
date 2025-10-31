@@ -1,0 +1,74 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /api/calificaciones
+
+spring:
+  application:
+    name: Calificaciones
+
+  datasource:
+    url: jdbc:mariadb://40.233.27.238:3307/ratings_db
+    username: app_user
+    password: appSa456.
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    show-sql: true
+
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+
+  jackson:
+    default-property-inclusion: non_null
+
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:/db/migration
+    table: schema_version_calificacion
+    validate-on-migrate: false
+
+  kafka:
+    admin:
+      auto-create: true
+    bootstrap-servers:
+      #- localhost:9092
+      - b-1.kafkap2sa.uqqw98.c10.kafka.us-east-1.amazonaws.com:9094
+      - b-2.kafkap2sa.uqqw98.c10.kafka.us-east-1.amazonaws.com:9094
+    consumer:
+      group-id: cines-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        security.protocol: SSL
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      properties:
+        security.protocol: SSL
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    tags-sorter: alpha
+    operations-sorter: alpha
+  show-actuator: false
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8765/
+    register-with-eureka: true
+    fetch-registry: true
+
