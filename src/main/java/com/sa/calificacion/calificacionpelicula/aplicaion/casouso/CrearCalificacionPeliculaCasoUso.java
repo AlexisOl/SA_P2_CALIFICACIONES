@@ -36,17 +36,6 @@ public class CrearCalificacionPeliculaCasoUso implements CrearCalificacionPelicu
     @Override
     @Transactional
     public CalificacionPelicula crearCalificacion(CrearCalificacionPeliculaDTO dto) {
-        // Verificar que el usuario existe
-        boolean usuarioExiste = verificarUsuarioExistente(dto.getUsuarioId());
-        if (!usuarioExiste) {
-            throw new IllegalArgumentException("El usuario no existe");
-        }
-
-        // Verificar que la película existe
-//        boolean peliculaExiste = verificarPeliculaExistente(dto.getPeliculaId());
-//        if (!peliculaExiste) {
-//            throw new IllegalArgumentException("La película no existe");
-//        }
 
         // Verificar que el usuario no haya calificado ya esta película
         if (calificacionPeliculaOutputPort.existeCalificacion(dto.getUsuarioId(), dto.getPeliculaId())) {
@@ -65,8 +54,6 @@ public class CrearCalificacionPeliculaCasoUso implements CrearCalificacionPelicu
 
         CalificacionPelicula calificacionGuardada = calificacionPeliculaOutputPort.guardarCalificacion(calificacion);
 
-        // Notificar que se creó una calificación
-        //notificarCalificacionOutputPort.notificarCalificacionPeliculaCreada(calificacionGuardada);
 
         return calificacionGuardada;
     }
