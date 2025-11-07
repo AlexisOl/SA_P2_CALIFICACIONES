@@ -37,16 +37,16 @@ public class CrearCalificacionSnackCasoUso implements CrearCalificacionSnackInpu
     @Transactional
     public CalificacionSnack crearCalificacion(CrearCalificacionSnackDTO dto) {
         // Verificar que el usuario existe
-        boolean usuarioExiste = verificarUsuarioExistente(dto.getUsuarioId());
-        if (!usuarioExiste) {
-            throw new IllegalArgumentException("El usuario no existe");
-        }
-
-        // Verificar que el snack existe
-        boolean snackExiste = verificarSnackExistente(dto.getSnackId());
-        if (!snackExiste) {
-            throw new IllegalArgumentException("El snack no existe");
-        }
+//        boolean usuarioExiste = verificarUsuarioExistente(dto.getUsuarioId());
+//        if (!usuarioExiste) {
+//            throw new IllegalArgumentException("El usuario no existe");
+//        }
+//
+//        // Verificar que el snack existe
+//        boolean snackExiste = verificarSnackExistente(dto.getSnackId());
+//        if (!snackExiste) {
+//            throw new IllegalArgumentException("El snack no existe");
+//        }
 
         // Verificar que el usuario no haya calificado ya este snack
         if (calificacionSnackOutputPort.existeCalificacion(dto.getUsuarioId(), dto.getSnackId())) {
@@ -66,7 +66,7 @@ public class CrearCalificacionSnackCasoUso implements CrearCalificacionSnackInpu
         CalificacionSnack calificacionGuardada = calificacionSnackOutputPort.guardarCalificacion(calificacion);
 
         // Notificar que se creó una calificación
-        notificarCalificacionOutputPort.notificarCalificacionSnackCreada(calificacionGuardada);
+        //notificarCalificacionOutputPort.notificarCalificacionSnackCreada(calificacionGuardada);
 
         return calificacionGuardada;
     }

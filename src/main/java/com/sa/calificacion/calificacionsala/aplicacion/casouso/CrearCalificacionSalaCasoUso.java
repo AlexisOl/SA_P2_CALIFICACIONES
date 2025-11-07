@@ -38,15 +38,15 @@ public class CrearCalificacionSalaCasoUso implements CrearCalificacionSalaInputP
             throw new IllegalArgumentException("El usuario no existe");
         }
 
-        boolean salaExiste = verificarSalaExistente(dto.getSalaId());
-        if (!salaExiste) {
-            throw new IllegalArgumentException("La sala no existe");
-        }
+//        boolean salaExiste = verificarSalaExistente(dto.getSalaId());
+//        if (!salaExiste) {
+//            throw new IllegalArgumentException("La sala no existe");
+//        }
 
-        boolean salaPermiteCalificaciones = verificarSalaPermiteCalificaciones(dto.getSalaId());
-        if (!salaPermiteCalificaciones) {
-            throw new IllegalStateException("Esta sala no permite calificaciones en este momento");
-        }
+//        boolean salaPermiteCalificaciones = verificarSalaPermiteCalificaciones(dto.getSalaId());
+//        if (!salaPermiteCalificaciones) {
+//            throw new IllegalStateException("Esta sala no permite calificaciones en este momento");
+//        }
 
         if (calificacionSalaOutputPort.existeCalificacion(dto.getUsuarioId(), dto.getSalaId())) {
             throw new IllegalStateException("Ya has calificado esta sala");
@@ -62,7 +62,7 @@ public class CrearCalificacionSalaCasoUso implements CrearCalificacionSalaInputP
         );
 
         CalificacionSala calificacionGuardada = calificacionSalaOutputPort.guardarCalificacion(calificacion);
-        notificarCalificacionOutputPort.notificarCalificacionSalaCreada(calificacionGuardada);
+        //notificarCalificacionOutputPort.notificarCalificacionSalaCreada(calificacionGuardada);
 
         return calificacionGuardada;
     }

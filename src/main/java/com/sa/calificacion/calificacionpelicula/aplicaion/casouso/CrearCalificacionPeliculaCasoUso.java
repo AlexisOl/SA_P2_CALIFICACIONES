@@ -43,10 +43,10 @@ public class CrearCalificacionPeliculaCasoUso implements CrearCalificacionPelicu
         }
 
         // Verificar que la película existe
-        boolean peliculaExiste = verificarPeliculaExistente(dto.getPeliculaId());
-        if (!peliculaExiste) {
-            throw new IllegalArgumentException("La película no existe");
-        }
+//        boolean peliculaExiste = verificarPeliculaExistente(dto.getPeliculaId());
+//        if (!peliculaExiste) {
+//            throw new IllegalArgumentException("La película no existe");
+//        }
 
         // Verificar que el usuario no haya calificado ya esta película
         if (calificacionPeliculaOutputPort.existeCalificacion(dto.getUsuarioId(), dto.getPeliculaId())) {
@@ -66,7 +66,7 @@ public class CrearCalificacionPeliculaCasoUso implements CrearCalificacionPelicu
         CalificacionPelicula calificacionGuardada = calificacionPeliculaOutputPort.guardarCalificacion(calificacion);
 
         // Notificar que se creó una calificación
-        notificarCalificacionOutputPort.notificarCalificacionPeliculaCreada(calificacionGuardada);
+        //notificarCalificacionOutputPort.notificarCalificacionPeliculaCreada(calificacionGuardada);
 
         return calificacionGuardada;
     }
